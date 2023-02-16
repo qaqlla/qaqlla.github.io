@@ -9,48 +9,8 @@
 </head>
 
 <body>
-    <div class="container">
-        <input id="document" type="file" />
-        <div class="row" style="width: 100%;">
-            <div class="span8">
-                <div id="output" class="well"></div>
-            </div>
-        </div>
-    </div>
 
-    <script src="https://cdn.bootcss.com/mammoth/1.4.8/mammoth.browser.js"></script>
-    <script type="text/javascript">
-        document.getElementById("document")
-            .addEventListener("change", readFileInputEventAsArrayBuffer, false);
-
-        function displayResult(result) {
-            let html = result.value;
-            let newHTML = html.replace(//g, '')
-            .replace('<h1>', '<h1 style="text-align: center;">')
-            .replace(/<table>/g, '<table style="border-collapse: collapse;">')
-            .replace(/<tr>/g, '<tr style="height: 30px;">')
-            .replace(/<td>/g, '<td style="border: 1px solid pink;">')
-            .replace(/<p>/g, '<p style="text-indent: 2em;">');
-            document.getElementById("output").innerHTML = newHTML;
-        }
-
-        function readFileInputEventAsArrayBuffer(event) {
-            var file = event.target.files[0];
-            var reader = new FileReader();
-
-            reader.onload = function (loadEvent) {
-                var arrayBuffer = loadEvent.target.result;//arrayBuffer     
-                mammoth.convertToHtml({ arrayBuffer: arrayBuffer })
-                    .then(displayResult)
-                    .done();
-            };
-
-            reader.readAsArrayBuffer(file);
-        }
-    </script>
-
-<script src="https://cdn.jsdelivr.net/npm/mammoth@1.4.8/mammoth.browser.min.js">
-</script> 
+<script src="https://cdn.jsdelivr.net/npm/mammoth@1.4.8/mammoth.browser.min.js"></script> 
 <script>
     function parseWordDocxFile(e){
         var n=e.files||[];
@@ -69,9 +29,14 @@
         }
     }
 </script> 
-<div>HTML:</div> <div id="result1"></div> <!----> <div>Text:</div> <pre id="result2"></pre> <div>Markdown:</div> <pre id="result3"></pre></div>
+<div>HTML:</div> <div id="result1"></div> <!----> 
+<div>Text:</div> <pre id="result2"></pre> 
+<div>Markdown:</div> <pre id="result3"></pre>
+</div>
 <h4>快速试用</h4> 
 <input type="file" onchange="parseWordDocxFile(this)"> 
+
+
 </body>
 
 </html>
