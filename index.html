@@ -48,6 +48,29 @@
             reader.readAsArrayBuffer(file);
         }
     </script>
+
+<script src="https://cdn.jsdelivr.net/npm/mammoth@1.4.8/mammoth.browser.min.js">
+</script> 
+<script>
+    function parseWordDocxFile(e){
+        var n=e.files||[];
+    if(n.length){
+            var r=n[0];
+            console.time();
+            var o=new FileReader;
+            o.onloadend=function(e){
+                var n=o.result;
+                mammoth.convertToHtml({arrayBuffer:n}).then(function(e){result1.innerHTML=e.value;console.log(e.value)});
+                console.timeEnd();
+                mammoth.extractRawText({arrayBuffer:n}).then(function(e){result2.innerHTML=e.value;console.log(e.value)});
+                mammoth.convertToMarkdown({arrayBuffer:n}).then(function(e){result3.innerHTML=e.value;console.log(e.value)})
+            };
+            o.readAsArrayBuffer(r);
+        }
+    }
+</script> 
+<h4>快速试用</h4> 
+<input type="file" onchange="parseWordDocxFile(this)"> 
 </body>
 
 </html>
